@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "830702443512",
+    "project_id": "gameview-10362",
+    "storage_bucket": "gameview-10362.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:830702443512:android:1cd86dc41db9a104ced40d",
+        "android_client_info": {
+          "package_name": "com.example.myapplicationrv"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzIGYzmOc-1njhK-g3QFGvQ20EsQYlQpI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

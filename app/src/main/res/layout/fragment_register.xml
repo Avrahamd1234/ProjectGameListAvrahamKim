@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragmentsLogin.RegisterFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/design_default_color_secondary"
+        android:backgroundTint="@color/design_default_color_secondary"
+        android:orientation="vertical"
+        tools:context=".fragments.FragmentThree">
+
+        <TextView
+            android:id="@+id/RegisterTextViewFragmentRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.2"
+            android:gravity="center"
+            android:text="Registration"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <EditText
+            android:id="@+id/EmailEditTextBoxRegisterFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.2"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Email"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/PasswordEditTextRegisterFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.2"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Password"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/ConfirmPasswordEditTextRegisterFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.2"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Confirm Password"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/PhoneNumberEditTextFragmentRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.2"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Phone Number"
+            android:inputType="text" />
+
+        <Button
+            android:id="@+id/RegisterButtonFragmentRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.1"
+            android:gravity="center"
+            android:text="Register" />
+    </LinearLayout>
+
+</FrameLayout>

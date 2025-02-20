@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/loginFragment">
+    <fragment
+        android:id="@+id/registerFragment2"
+        android:name="com.example.myapplicationrv.fragmentsLogin.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment2_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/EULAFragment"
+        android:name="com.example.myapplicationrv.fragmentsLogin.EULAFragment"
+        android:label="fragment_e_u_l_a"
+        tools:layout="@layout/fragment_e_u_l_a" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.example.myapplicationrv.fragmentsLogin.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/achievementsFragment"
+        android:name="com.example.myapplicationrv.fragmentsGamesList.AchievementsFragment"
+        android:label="fragment_achievements"
+        tools:layout="@layout/fragment_achievements" />
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.myapplicationrv.fragmentsGamesList.FavoritesFragment"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites" />
+    <fragment
+        android:id="@+id/personalAreaFragment"
+        android:name="com.example.myapplicationrv.fragmentsGamesList.PersonalAreaFragment"
+        android:label="fragment_personal_area"
+        tools:layout="@layout/fragment_personal_area" />
+    <fragment
+        android:id="@+id/searchHistoryFragment"
+        android:name="com.example.myapplicationrv.fragmentsGamesList.SearchHistoryFragment"
+        android:label="fragment_search_history"
+        tools:layout="@layout/fragment_search_history" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.myapplicationrv.fragmentsLogin.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment2"
+            app:destination="@id/registerFragment2" />
+        <action
+            android:id="@+id/action_loginFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_EULAFragment"
+            app:destination="@id/EULAFragment" />
+    </fragment>
+</navigation>

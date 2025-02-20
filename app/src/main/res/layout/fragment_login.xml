@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:layout_weight="0.1"
+    android:orientation="vertical"
+    tools:context=".fragmentsLogin.LoginFragment">
+
+    <ImageView
+        android:id="@+id/logoFragmentLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="0.1"
+        app:srcCompat="@drawable/gameviewlogo" />
+
+    <EditText
+        android:id="@+id/emailEditTextBoxLoginFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="0.1"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Email"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/passwordEditTextFragmentLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="0.1"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Password"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/loginButtonFragmentLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="0.1"
+        android:gravity="center"
+        android:text="Login" />
+
+    <Button
+        android:id="@+id/registerButtonFragmentLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="0.1"
+        android:text="Register" />
+
+    <Button
+        android:id="@+id/aboutButtonFragmentLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="0.1"
+        android:gravity="center"
+        android:text="About" />
+
+    <Button
+        android:id="@+id/eulaButtonFragmentLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="0.1"
+        android:gravity="center"
+        android:text="EULA" />
+</LinearLayout>
