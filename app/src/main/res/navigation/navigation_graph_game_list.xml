@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph_game_list"
+    app:startDestination="@id/gameListFragment">
+
+    <fragment
+        android:id="@+id/achievementsFragment"
+        android:name="com.example.myapplicationrv.fragmentsGamesList.AchievementsFragment"
+        android:label="fragment_achievements"
+        tools:layout="@layout/fragment_achievements" />
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.myapplicationrv.fragmentsGamesList.FavoritesFragment"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites" />
+    <fragment
+        android:id="@+id/personalAreaFragment"
+        android:name="com.example.myapplicationrv.fragmentsGamesList.PersonalAreaFragment"
+        android:label="fragment_personal_area"
+        tools:layout="@layout/fragment_personal_area" />
+    <fragment
+        android:id="@+id/gameListFragment"
+        android:name="com.example.myapplicationrv.fragmentsGamesList.GameListFragment"
+        android:label="fragment_game_list"
+        tools:layout="@layout/fragment_game_list" >
+        <action
+            android:id="@+id/action_gameListFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
+        <action
+            android:id="@+id/action_gameListFragment_to_achievementsFragment"
+            app:destination="@id/achievementsFragment" />
+        <action
+            android:id="@+id/action_gameListFragment_to_personalAreaFragment"
+            app:destination="@id/personalAreaFragment" />
+    </fragment>
+</navigation>

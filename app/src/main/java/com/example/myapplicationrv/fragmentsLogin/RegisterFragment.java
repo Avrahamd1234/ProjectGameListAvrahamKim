@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.myapplicationrv.R;
-import com.example.myapplicationrv.activities.MainActivity;
 import com.example.myapplicationrv.activities.MainActivityLogin;
 
 /**

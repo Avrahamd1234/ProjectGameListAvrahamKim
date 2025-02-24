@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.myapplicationrv.R;
-import com.example.myapplicationrv.activities.MainActivity;
 import com.example.myapplicationrv.activities.MainActivityLogin;
 
 /**

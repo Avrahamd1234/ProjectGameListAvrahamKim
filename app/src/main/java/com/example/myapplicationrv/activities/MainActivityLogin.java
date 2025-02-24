@@ -1,5 +1,6 @@
 package com.example.myapplicationrv.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -43,30 +44,53 @@ public class MainActivityLogin extends AppCompatActivity { //First main activity
 
 public void register(View view, String emailString, String passwordString, String phoneString){
         Toast.makeText(MainActivityLogin.this, "inside register function", Toast.LENGTH_LONG).show();
-        //temp until FireBase is implemented
-        Toast.makeText(MainActivityLogin.this,"register successful",Toast.LENGTH_LONG).show();
-    Navigation.findNavController(view).navigate(R.id.action_registerFragment2_to_loginFragment);
+    mAuth.createUserWithEmailAndPassword(emailString, passwordString)
+            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        // register success, update UI with the signed-in user's information
+                        //writeData(emailString,phoneString);
+                        Toast.makeText(MainActivityLogin.this, "register successful",Toast.LENGTH_LONG).show();
+                        Navigation.findNavController(view).navigate(R.id.action_registerFragment2_to_loginFragment);
+                    } else {
+                        // If register fails, display a message to the user.
+                        Toast.makeText(MainActivityLogin.this,"register failed", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
 }
 
     public void login (View view){
         String emailString = ((EditText) findViewById(R.id.emailEditTextBoxLoginFragment)).getText().toString();
         String passwordString = ((EditText) findViewById(R.id.passwordEditTextFragmentLogin)).getText().toString();
-        //check intents to move to the other main activity
-        //Navigation.findNavController(view).navigate(R.id.actionloginfragmentto);
-        mAuth.createUserWithEmailAndPassword(emailString, passwordString)
+
+        mAuth.signInWithEmailAndPassword(emailString, passwordString)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // register success, update UI with the signed-in user's information
-                            //writeData(emailString,phoneString);
-                            Toast.makeText(MainActivityLogin.this, "register successful",Toast.LENGTH_LONG).show();
-                            Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_aboutFragment);
+                            // Sign in success, update UI with the signed-in user's information
+                            Toast.makeText(MainActivityLogin.this, "login successful",Toast.LENGTH_LONG).show();
+                            //use intents to move to the other main activity from here
+                            //Intent intent = new Intent(this, MainActivityLogin.class);
+                            Intent intent = new Intent(MainActivityLogin.this, MainActivityGameList.class);
+                            //startActivity( new Intent(currentactivity.this, Tostartactivity.class));
+                            intent.putExtra("web_url", "userIDSomething");
+                            startActivity(intent);
+
+
+                            //Navigation.findNavController(view).navigate(R.id.action_fragmentOne_to_fragmentTwo);
                         } else {
-                            // If register fails, display a message to the user.
-                            Toast.makeText(MainActivityLogin.this,"register failed", Toast.LENGTH_SHORT).show();
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(MainActivityLogin.this,"login failed", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
+
+
+        //check intents to move to the other main activity
+        //Navigation.findNavController(view).navigate(R.id.actionloginfragmentto);
+
     }
 }

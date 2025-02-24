@@ -18,15 +18,17 @@ import com.example.myapplicationrv.models.Data;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivityGameList extends AppCompatActivity {
+//This is the prepared recycle view main code, we transferred it to a fragment
 
-    private ArrayList<Data> arr;
-    private RecyclerView recyclerView;
-    private LinearLayoutManager layoutManager;
-    private CustomeAdapter customeAdapter;
+// private ArrayList<Data> arr;
+//    private RecyclerView recyclerView;
+//    private LinearLayoutManager layoutManager;
+//    private CustomeAdapter customeAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
@@ -36,23 +38,23 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        recyclerView = findViewById(R.id.gameListFragmentRvcon);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+//        recyclerView = findViewById(R.id.gameListFragmentRvcon);
+//        layoutManager = new LinearLayoutManager(this);
+//        recyclerView.setLayoutManager(layoutManager);
+//        recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        arr = new ArrayList<Data>();
-
-        for (int i =0 ; i < myData.nameArray.length ; i++ ){
-                arr.add ( new Data(
-                        myData.nameArray[i],
-                        myData.versionArray[i],
-                        myData.drawableArray[i],
-                        myData.id_[i]
-                ) );
+//        arr = new ArrayList<Data>();
+//
+//        for (int i =0 ; i < myData.nameArray.length ; i++ ){
+//                arr.add ( new Data(
+//                        myData.nameArray[i],
+//                        myData.versionArray[i],
+//                        myData.drawableArray[i],
+//                        myData.id_[i]
+//                ) );
         }
 
-        customeAdapter = new CustomeAdapter(arr);
-        recyclerView.setAdapter(customeAdapter);
-    }
+//        customeAdapter = new CustomeAdapter(arr);
+//        recyclerView.setAdapter(customeAdapter);
+//    }
 }

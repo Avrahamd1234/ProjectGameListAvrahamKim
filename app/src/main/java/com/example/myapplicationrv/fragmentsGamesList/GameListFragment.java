@@ -75,8 +75,8 @@ public class GameListFragment extends Fragment {
         // Inflate the layout for this fragment
         //fix copying MainActivity to this Fragment
         View view =  inflater.inflate(R.layout.fragment_game_list, container, false);
-        recyclerView = view.findViewById(R.id.rvcon);
-        layoutManager = new LinearLayoutManager(this);
+        recyclerView = view.findViewById(R.id.gameListFragmentRvcon);
+        layoutManager = new LinearLayoutManager(getActivity()); //if problems arise - look into "onAttach (Context context)"
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
