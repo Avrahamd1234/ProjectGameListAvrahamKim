@@ -6,8 +6,15 @@
     android:orientation="vertical"
     tools:context=".fragmentsGamesList.GameListFragment" >
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/gameListFragmentRvcon"
+    <TextView
+        android:id="@+id/gameListFragmentUserTextView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:text="Hello" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragmentGameListRecycleView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+         />
 </LinearLayout>

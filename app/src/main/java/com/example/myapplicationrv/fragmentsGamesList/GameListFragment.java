@@ -10,9 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.myapplicationrv.R;
+import com.example.myapplicationrv.activities.MainActivityGameList;
 import com.example.myapplicationrv.adapters.CustomeAdapter;
-import com.example.myapplicationrv.classes.myData;
-import com.example.myapplicationrv.models.Data;
+import com.example.myapplicationrv.classes.myGameData;
+import com.example.myapplicationrv.models.GameData;
 
 import java.util.ArrayList;
 
@@ -24,7 +25,7 @@ import java.util.ArrayList;
  */
 public class GameListFragment extends Fragment {
 
-    private ArrayList<Data> arr;
+    private ArrayList<GameData> arr;
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
     private CustomeAdapter customeAdapter;
@@ -74,21 +75,26 @@ public class GameListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         //fix copying MainActivity to this Fragment
+        MainActivityGameList mainActivityGameList = (MainActivityGameList) getActivity();
         View view =  inflater.inflate(R.layout.fragment_game_list, container, false);
-        recyclerView = view.findViewById(R.id.gameListFragmentRvcon);
+        mainActivityGameList.readData();
+        recyclerView = view.findViewById(R.id.fragmentGameListRecycleView);
         layoutManager = new LinearLayoutManager(getActivity()); //if problems arise - look into "onAttach (Context context)"
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        arr = new ArrayList<Data>();
+        arr = new ArrayList<GameData>();
 
-        for (int i = 0; i < myData.nameArray.length ; i++ ){
-            arr.add ( new Data(
-                    myData.nameArray[i],
-                    myData.versionArray[i],
-                    myData.drawableArray[i],
-                    myData.id_[i]
-            ) );
+        for (int i = 0; i < myGameData.gameNameArray.length ; i++ ){
+            arr.add ( new GameData(
+                    myGameData.gameNameArray[i],
+                    myGameData.ratingArray[i],
+                    myGameData.drawableArray[i],
+                    myGameData.priceArray[i],
+                    myGameData.genreArray[i],
+                    myGameData.descriptionArray[i],
+                    myGameData.videoUrlArray[i]
+            ));
         }
 
         customeAdapter = new CustomeAdapter(arr);

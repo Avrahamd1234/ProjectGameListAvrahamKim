@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.myapplicationrv.R;
 import com.example.myapplicationrv.activities.MainActivityLogin;
@@ -70,8 +72,15 @@ public class LoginFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                MainActivityLogin mainActivityLoginFragLogin = (MainActivityLogin) getActivity();
-                mainActivityLoginFragLogin.login(view); //we'll get the textbox data inside the function
+                String emailString = ((EditText) view.findViewById(R.id.emailEditTextBoxLoginFragment)).getText().toString();
+                String passwordString = ((EditText) view.findViewById(R.id.passwordEditTextFragmentLogin)).getText().toString();
+                if(emailString.isEmpty() || passwordString.isEmpty()){
+                    Toast.makeText(getContext(), "one field is empty",Toast.LENGTH_LONG).show();
+                }
+                else {
+                    MainActivityLogin mainActivityLoginFragLogin = (MainActivityLogin) getActivity();
+                    mainActivityLoginFragLogin.login(view, emailString, passwordString); //we'll get the textbox data inside the function
+                }
             }
         });
         Button buttonRegister = view.findViewById(R.id.registerButtonFragmentLogin);

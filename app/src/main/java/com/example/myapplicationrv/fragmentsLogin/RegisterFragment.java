@@ -71,6 +71,7 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //here we grab the texts inside the text fields, then convert to string
+                MainActivityLogin mainActivityLogin = (MainActivityLogin) getActivity();
                 EditText emailResult = view.findViewById(R.id.EmailEditTextBoxRegisterFragment);
                 EditText passwordResult = view.findViewById(R.id.PasswordEditTextRegisterFragment);
                 EditText rePasswordResult = view.findViewById(R.id.ConfirmPasswordEditTextRegisterFragment);
@@ -81,27 +82,31 @@ public class RegisterFragment extends Fragment {
                 String phoneString = phoneResult.getText().toString();
 
                 if(!emailString.isEmpty() && !passwordString.isEmpty() && !repasswordString.isEmpty() && !phoneString.isEmpty()){//fields should not be empty
-                    if (passwordString.length() >= 6 ){ //password should be at least 6 characters long to conform to FireBase rules
-                        if(passwordString.equals(repasswordString)){//password should be equal to password confirmation
-                            MainActivityLogin mainActivityLogin = (MainActivityLogin) getActivity();
-                            mainActivityLogin.register(view,emailString,passwordString,phoneString);
-
-                            //success
-                        }
-                        else {
-                            //failure
+                    if (mainActivityLogin.testEmail(emailString)){ //Email should match Firebase's standards
+                        if (passwordString.length() >= 6 ){ //password should be at least 6 characters long to conform to FireBase rules
+                           if(passwordString.equals(repasswordString)){//password should be equal to password confirmation
+                                mainActivityLogin.register(view,emailString,passwordString,phoneString);
+                              //success
+                            }
+                           else {
+                            //passwords not equal failure
                             Toast.makeText(getContext(), "passwords are not equal",Toast.LENGTH_LONG).show();
                         }
+                        }
+                        else{
+                            //password length failure
+                            Toast.makeText(getContext(), "password is not long enough, at least 6 characters",Toast.LENGTH_LONG).show();
+                        }
                     }
+                    else {
+                        //Email failure
+                        Toast.makeText(getContext(), "email address is not valid",Toast.LENGTH_LONG).show();
+                    }
+                }
                     else{
                         //failure
-                        Toast.makeText(getContext(), "password is not long enough, at least 6 characters",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "one field is empty",Toast.LENGTH_LONG).show();
                     }
-                }
-                else{
-                    //failure
-                    Toast.makeText(getContext(), "one field is empty",Toast.LENGTH_LONG).show();
-                }
             }
         });
         return view;
