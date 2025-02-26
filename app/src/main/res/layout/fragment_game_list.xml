@@ -12,9 +12,16 @@
         android:layout_height="wrap_content"
         android:text="Hello" />
 
+    <EditText
+        android:id="@+id/fragmentGameListEditTextSearchBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Search Here"
+        android:inputType="text" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragmentGameListRecycleView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-         />
+        android:layout_height="match_parent" />
 </LinearLayout>

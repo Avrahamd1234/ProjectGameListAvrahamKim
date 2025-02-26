@@ -18,49 +18,71 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center"
                 android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/cardViewImageViewGameImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.1"
-                    tools:srcCompat="@tools:sample/avatars" />
 
                 <TextView
                     android:id="@+id/cardViewTextViewGameName"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.9"
-                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:gravity="start"
+                    android:maxLines="3"
                     android:text="Game name" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/cardViewTextViewScoreStatic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:text="Metacritic Score:" />
+
+                    <TextView
+                        android:id="@+id/cardViewTextViewPriceStatic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:text="Price(ils):" />
+
+                    <TextView
+                        android:id="@+id/cardViewTextViewGenreStatic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:text="Genre" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.1"
+                    android:layout_weight="0.3"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/cardViewTextViewGameRating"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="0.9"
                         android:text="Score" />
 
                     <TextView
                         android:id="@+id/cardViewTextViewGamePrice"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="0.9"
                         android:text="Price" />
 
                     <TextView
                         android:id="@+id/cardViewTextViewGameGenre"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="0.9"
                         android:text="Genre" />
                 </LinearLayout>
@@ -70,38 +92,30 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.2"
+                android:layout_weight="0.5"
                 android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/cardViewButtonShowMoreOrLess"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:backgroundTint="#3DA714"
-                    android:text="Show More" />
 
                 <LinearLayout
                     android:id="@+id/LinearLayoutCollapsible"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.9"
+                    android:layout_weight="0.5"
                     android:orientation="vertical"
-                    android:visibility="visible"
-                    tools:visibility="visible">
+                    android:visibility="visible">
 
                     <TextView
                         android:id="@+id/cardViewTextViewGameDescription"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.5"
+                        android:maxLines="10"
                         android:text="Description" />
 
-                    <VideoView
-                        android:id="@+id/cardViewVideoViewGameTrailer"
+                    <ImageView
+                        android:id="@+id/cardViewImageViewGameImage"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.5" />
+                        android:layout_weight="0.6"
+                        tools:srcCompat="@tools:sample/avatars" />
 
                 </LinearLayout>
 

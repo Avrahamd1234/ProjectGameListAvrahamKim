@@ -9,10 +9,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+
 import com.example.myapplicationrv.R;
+import com.example.myapplicationrv.Services.DataService;
 import com.example.myapplicationrv.activities.MainActivityGameList;
 import com.example.myapplicationrv.adapters.CustomeAdapter;
-import com.example.myapplicationrv.classes.myGameData;
+//import com.example.myapplicationrv.classes.myGameData;
 import com.example.myapplicationrv.models.GameData;
 
 import java.util.ArrayList;
@@ -25,7 +28,8 @@ import java.util.ArrayList;
  */
 public class GameListFragment extends Fragment {
 
-    private ArrayList<GameData> arr;
+    //private ArrayList<GameData> arr;
+    private ArrayList<GameData> arr2;
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
     private CustomeAdapter customeAdapter;
@@ -83,23 +87,27 @@ public class GameListFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        arr = new ArrayList<GameData>();
+        EditText searchBox = mainActivityGameList.findViewById(R.id.fragmentGameListEditTextSearchBox);
 
-        for (int i = 0; i < myGameData.gameNameArray.length ; i++ ){
-            arr.add ( new GameData(
-                    myGameData.gameNameArray[i],
-                    myGameData.ratingArray[i],
-                    myGameData.drawableArray[i],
-                    myGameData.priceArray[i],
-                    myGameData.genreArray[i],
-                    myGameData.descriptionArray[i],
-                    myGameData.videoUrlArray[i]
-            ));
+
+        DataService dataService = new DataService();
+        arr2 = dataService.getAllGames();
+        //String searchBoxText = searchBox.getText();
+
+        if(searchBox.getText() == null) {
+            customeAdapter = new CustomeAdapter(arr2);
+            recyclerView.setAdapter(customeAdapter);
+            return view;
+        }
+        else {
+        for(int i=0;i<arr2.size();i++)
+        {
+            if (arr2.get(i).getGameName().contains())
+
         }
 
-        customeAdapter = new CustomeAdapter(arr);
-        recyclerView.setAdapter(customeAdapter);
-        return view;
+            return view;
+        }
     }
 
 }

@@ -1,34 +1,36 @@
 package com.example.myapplicationrv.models;
 
+import android.net.Uri;
+
 public class GameData {
 
     //TextView gameName;
 
     private String gameName;
     private int rating;
-    private int image;
-    private int price;
+    private Uri image;
+    private double price;
     private String genre;
     private String description;
-    private String videoURL;
+    private Uri videoURI;
 
-    public GameData(String gameName, int rating, int image, int price, String genre, String description, String videoURL) {
+    public GameData(String gameName, int rating, Uri image, double price, String genre, String description, Uri videoURI) {
         this.gameName = gameName;
         this.rating = rating;
         this.image = image;
         this.price = price;
         this.genre = genre;
         this.description = description;
-        this.videoURL = videoURL;
+        this.videoURI = videoURI;
     }
     public GameData() {
         this.gameName = "";
         this.rating = 0;
-        this.image = 0;
+        this.image = Uri.parse("");
         this.price = 0;
         this.genre = "";
         this.description = "";
-        this.videoURL = "";
+        this.videoURI = Uri.parse("");
     }
 
     public String getGameName() {
@@ -53,12 +55,12 @@ public class GameData {
         this.description = description;
     }
 
-    public String getVideoURL() {
-        return videoURL;
+    public Uri getVideoURL() {
+        return videoURI;
     }
 
-    public void setVideoURL(String videoURL) {
-        this.videoURL = videoURL;
+    public void setVideoURL(Uri videoURI) {
+        this.videoURI = videoURI;
     }
 
 
@@ -70,15 +72,15 @@ public class GameData {
         this.rating = rating;
     }
 
-    public int getImage() {
+    public Uri getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(Uri image) {
         this.image = image;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
