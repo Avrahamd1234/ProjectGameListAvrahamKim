@@ -1,7 +1,10 @@
 package com.example.myapplicationrv.adapters;
 
 import static androidx.browser.customtabs.CustomTabsClient.getPackageName;
+import static androidx.core.content.ContextCompat.startActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +54,7 @@ public class CustomeAdapter extends RecyclerView.Adapter<CustomeAdapter.myViewHo
 
     public class myViewHolder extends RecyclerView.ViewHolder {
         ImageButton favButton;
+        //ImageButton trailerButton;
         TextView gameName;
         ImageView imageViewItem;
         TextView rating;
@@ -58,8 +62,8 @@ public class CustomeAdapter extends RecyclerView.Adapter<CustomeAdapter.myViewHo
         TextView genre;
         TextView description;
         TextView id;
-        Button showMoreOrLessButton;
-        VideoView videoView;
+       // Button showMoreOrLessButton;
+       // VideoView videoView;
 
         public myViewHolder(View itemView) {
             super(itemView);
@@ -70,6 +74,7 @@ public class CustomeAdapter extends RecyclerView.Adapter<CustomeAdapter.myViewHo
             genre = itemView.findViewById(R.id.cardViewTextViewGameGenre);
             favButton = itemView.findViewById(R.id.cardViewImageButtonFavButton);
             id = itemView.findViewById((R.id.cardViewTextViewSteamId));
+//            trailerButton = itemView.findViewById((R.id.cardViewImageButtonTrailerIcon));
             // Button showMoreOrLessButton = itemView.findViewById(R.id.cardViewButtonShowMoreOrLess);
             //VideoView videoview = itemView.findViewById(R.id.cardViewVideoViewGameTrailer);
             description = itemView.findViewById(R.id.cardViewTextViewGameDescription);
@@ -106,6 +111,18 @@ public class CustomeAdapter extends RecyclerView.Adapter<CustomeAdapter.myViewHo
         holder.description.setText(arr.get(position).getDescription());
         holder.id.setText(arr.get(position).getId()+"");
 //        int currentId = arr.get(position).getId();
+        //trailer code: intent didn't work, cba'd.
+//        holder.trailerButton.setOnClickListener(new View.OnClickListener() { attempt to open Uri
+//            @Override
+//            public void onClick(View v) {
+//                Uri uri = (arr.get(position).getVideoURL());
+//                    Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+//                    startActivity(intent);
+//                }
+//
+//            }
+//        });
+
         holder.favButton.setImageResource(R.drawable.favempty);
         for (Integer favTest : arrFav) {
             if (arr.get(position).getId() == favTest) {
@@ -196,7 +213,7 @@ public class CustomeAdapter extends RecyclerView.Adapter<CustomeAdapter.myViewHo
                         myRef.addListenerForSingleValueEvent(new ValueEventListener(){
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                Toast.makeText(v.getContext(), "inside false fav",Toast.LENGTH_LONG).show();
+//                                Toast.makeText(v.getContext(), "inside false fav",Toast.LENGTH_LONG).show();
                                 User tempUser = snapshot.getValue(User.class);
                                 arrFav.add(arr.get(position).getId());
                                 tempUser.setFavorites(arrFav);

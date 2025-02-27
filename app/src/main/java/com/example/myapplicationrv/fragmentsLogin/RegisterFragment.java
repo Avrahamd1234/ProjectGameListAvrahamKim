@@ -75,17 +75,17 @@ public class RegisterFragment extends Fragment {
                 EditText emailResult = view.findViewById(R.id.EmailEditTextBoxRegisterFragment);
                 EditText passwordResult = view.findViewById(R.id.PasswordEditTextRegisterFragment);
                 EditText rePasswordResult = view.findViewById(R.id.ConfirmPasswordEditTextRegisterFragment);
-                EditText phoneResult = view.findViewById(R.id.PhoneNumberEditTextFragmentRegister);
+                //EditText phoneResult = view.findViewById(R.id.PhoneNumberEditTextFragmentRegister);
                 String emailString = emailResult.getText().toString();
                 String passwordString = passwordResult.getText().toString();
                 String repasswordString = rePasswordResult.getText().toString();
-                String phoneString = phoneResult.getText().toString();
+                //String phoneString = phoneResult.getText().toString();
 
-                if(!emailString.isEmpty() && !passwordString.isEmpty() && !repasswordString.isEmpty() && !phoneString.isEmpty()){//fields should not be empty
+                if(!emailString.isEmpty() && !passwordString.isEmpty() && !repasswordString.isEmpty()){// && !phoneString.isEmpty()){//fields should not be empty
                     if (mainActivityLogin.testEmail(emailString)){ //Email should match Firebase's standards
                         if (passwordString.length() >= 6 ){ //password should be at least 6 characters long to conform to FireBase rules
                            if(passwordString.equals(repasswordString)){//password should be equal to password confirmation
-                                mainActivityLogin.register(view,emailString,passwordString,phoneString);
+                                mainActivityLogin.register(view,emailString,passwordString);//,phoneString);
                               //success
                             }
                            else {

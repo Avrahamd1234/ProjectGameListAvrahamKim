@@ -209,9 +209,9 @@ public class GameListFragment extends Fragment {
         String searchBoxText = searchBox.getText().toString();
         ArrayList<GameData> filteredList = new ArrayList<>();
         switch(filterType){
-            case 1: {//show game names
+            case 1: {//show game names by genre or name
                 for (GameData gameData : arr2)
-                    if (gameData.getGameName().toLowerCase().contains(searchBoxText.toLowerCase()))
+                    if (gameData.getGameName().toLowerCase().contains(searchBoxText.toLowerCase()) || gameData.getGenre().toLowerCase().contains(searchBoxText.toLowerCase()))
                         filteredList.add(gameData);
                 customeAdapter = new CustomeAdapter(filteredList, userFavorites);
                 recyclerView.setAdapter(customeAdapter);

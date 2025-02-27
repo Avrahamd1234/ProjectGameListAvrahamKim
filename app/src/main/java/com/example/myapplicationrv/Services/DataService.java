@@ -32,7 +32,7 @@ public class DataService {
 
     public ArrayList<GameData> getAllGames(ArrayList<Integer> userFavorites){ //need to call this function at application start to ease loading time
         Integer [] idNumbers= {291690, 291710, 291750 ,291770, 291840, 291860, 291910, 291930, 291960, 292000, 292030, 292060, 292090, 292120, 292140, 292160, 292180, 292200, 292240, 292260, 292280, 292300, 292330, 292370, 292380, 292390, 292400, 292410, 292420, 292480, 292500, 292570, 292600, 292620, 292630, 292660, 292670, 292730, 292760, 292780, 292800, 292820, 292840, 292860, 292880, 292910, 292930, 292990, 293160, 293180};
-        for (int k = 0; k<5;k++) {
+        for (int k = 0; k<15;k++) {
             URL url;
             //Uri movieUri;
             //String genreString;
@@ -58,7 +58,7 @@ public class DataService {
                 dataE = dataE.getAsJsonObject("data");
                 String nameE = dataE.get("name").toString().replace("\"", "").trim();
                 String shortDescriptionE = dataE.get("short_description").toString().replace("\"", "").trim();
-int price;
+                int price;
                 try {
     JsonObject priceOverviewObj = dataE.getAsJsonObject("price_overview");
     JsonElement priceE = priceOverviewObj.get("final");
@@ -95,6 +95,7 @@ price = 0;
                 }
 try {
     JsonArray movieArr = dataE.getAsJsonArray("movies");
+    i = 0;
     for (JsonElement je : movieArr) {//didn't find a way to get only the first element so we're iterating, the genre lists are short
         if (i == 0) { //currently we're only taking the first genre
             JsonObject movieObj = je.getAsJsonObject();

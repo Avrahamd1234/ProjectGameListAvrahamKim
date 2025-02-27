@@ -56,17 +56,6 @@
             android:hint="Confirm Password"
             android:inputType="text" />
 
-        <EditText
-            android:id="@+id/PhoneNumberEditTextFragmentRegister"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="0.2"
-            android:ems="10"
-            android:gravity="center"
-            android:hint="Phone Number"
-            android:inputType="text" />
-
         <Button
             android:id="@+id/RegisterButtonFragmentRegister"
             android:layout_width="wrap_content"

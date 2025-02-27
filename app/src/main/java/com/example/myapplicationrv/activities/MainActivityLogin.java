@@ -55,7 +55,7 @@ public class MainActivityLogin extends AppCompatActivity { //First main activity
     }
 
 
-    public void register(View view, String emailString, String passwordString, String phoneString){
+    public void register(View view, String emailString, String passwordString){//}, String phoneString){
         Toast.makeText(MainActivityLogin.this, "inside register function", Toast.LENGTH_LONG).show();
     mAuth.createUserWithEmailAndPassword(emailString, passwordString)
             .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
