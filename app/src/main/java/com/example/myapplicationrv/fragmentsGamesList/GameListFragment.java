@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.myapplicationrv.R;
@@ -19,6 +20,7 @@ import com.example.myapplicationrv.adapters.CustomeAdapter;
 import com.example.myapplicationrv.models.GameData;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,7 +31,8 @@ import java.util.ArrayList;
 public class GameListFragment extends Fragment {
 
     //private ArrayList<GameData> arr;
-    private ArrayList<GameData> arr2;
+    public ArrayList<GameData> arr2;
+    //private ArrayList<GameData> arrSearch;
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
     private CustomeAdapter customeAdapter;
@@ -87,27 +90,40 @@ public class GameListFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        EditText searchBox = mainActivityGameList.findViewById(R.id.fragmentGameListEditTextSearchBox);
-
+        // EditText searchBox = mainActivityGameList.findViewById(R.id.fragmentGameListEditTextSearchBox);
+        // String searchBoxText = searchBox.getText().toString();
 
         DataService dataService = new DataService();
         arr2 = dataService.getAllGames();
-        //String searchBoxText = searchBox.getText();
 
-        if(searchBox.getText() == null) {
+        //if(searchBoxText.isEmpty()) {
             customeAdapter = new CustomeAdapter(arr2);
             recyclerView.setAdapter(customeAdapter);
             return view;
-        }
-        else {
-        for(int i=0;i<arr2.size();i++)
-        {
-            if (arr2.get(i).getGameName().contains())
+        //}
+//        else {
+//
+//            return view;
+//        }
+        //for(int i=0;i<arr2.size();i++)
+
+            //if (arr2.get(i).getGameName().contains())
 
         }
 
-            return view;
-        }
-    }
+//    private void filterGames(String type,ArrayList<GameData> arr;) {
+//        List<GameData> filteredList = new ArrayList<>();
+//        for(GameData gameData : arr)
+//            if(charityData.getCharity_name().equalsIgnoreCase(type))
+//                filteredList.add(charityData);
+//        // you have the filtered list "filteredList". Use it however you want
+//    }
+
 
 }
+//    public void funcOnClick(View view) {
+//        Button button = (Button) view;
+//        String searchBoxText = String.valueOf(searchBox.getText());
+//        ;//.charAt(0);
+//        result.append(buttonCharacter);
+

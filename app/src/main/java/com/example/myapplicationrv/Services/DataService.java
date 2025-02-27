@@ -31,8 +31,8 @@ public class DataService {
     }
 
     public ArrayList<GameData> getAllGames(){ //need to call this function at application start to ease loading time
-        Integer [] idNumbers= {291690, 291710, 646570, 291770, 291840, 291860, 291910, 291930, 291960, 292000, 292030, 292060, 292090, 292120, 292140, 292160, 292180, 292200, 292240, 292260, 292280, 292300, 292330, 292370, 292380, 292390, 292400, 292410, 292420, 292480, 292500, 292570, 292600, 292620, 292630, 292660, 292670, 292730, 292760, 292780, 292800, 292820, 292840, 292860, 292880, 292910, 292930, 292990, 293160, 293180};
-        for (int k = 0; k<5;k++) {
+        Integer [] idNumbers= {291690, 291710, 291750 ,291770, 291840, 291860, 291910, 291930, 291960, 292000, 292030, 292060, 292090, 292120, 292140, 292160, 292180, 292200, 292240, 292260, 292280, 292300, 292330, 292370, 292380, 292390, 292400, 292410, 292420, 292480, 292500, 292570, 292600, 292620, 292630, 292660, 292670, 292730, 292760, 292780, 292800, 292820, 292840, 292860, 292880, 292910, 292930, 292990, 293160, 293180};
+        for (int k = 0; k<15;k++) {
             URL url;
             //Uri movieUri;
             //String genreString;
@@ -104,7 +104,6 @@ try {
             movieString = webmE.getAsString();
             String formattedMovieString = java.net.URLEncoder.encode(movieString, "UTF-8");
             movieUri = Uri.parse(formattedMovieString);
-
         }
         i++;
     }
@@ -112,69 +111,9 @@ try {
 catch(Exception e){
     movieUri = Uri.parse("");
 }
-                //                //String name = gameNameE.toString().replace("\"", "").trim();//replace backslash of string, also trim any spaces before and after the string
-//                //String nativeName = nativeNameE.toString().replace("\"", "").trim();//replace backslash of string, also trim any spaces before and after the string
-//                //String flag = flagE.toString().replace("\"", "").trim();//replace backslash of string, also trim any spaces before and after the string
-//
-//                //arrGames.add(new GameData(name,nativeName,flag));
-//                //GameData(String gameName, int rating, int image, int price, String genre, String description, String videoURL)   GameData()
-
-                //JsonArray rootArr = root.getAsJsonArray(); //see root as array
-
-                //int i=0;
-                //for (JsonElement je : rootArr){ //go over the list of elements, like for each in csharp
-                //  if(i!=49) {
-                //  JsonObject obj =  je.getAsJsonObject();
-                //idStrings.add((obj.get("appid").toString().replace("\"", "").trim()));
-                //}
-
-//                //JsonObject obj = je.getAsJsonObject();
-//                JsonElement dataE = obj.get("data");
-//                JsonObject dataobj = dataE.getAsJsonObject();
-//
-//                JsonElement gameNameE = dataobj.get("name"); //extract data according to key
-//
-//                JsonElement metaCriticE = dataobj.get("metacritic");
-//                JsonObject metaCriticObj = metaCriticE.getAsJsonObject();
-//                JsonElement ratingE = metaCriticObj.get("score");
-//
-//                JsonElement headerImageUrl = dataobj.get("header_image");
-//
-//                JsonElement priceOverViewE = dataobj.get("price_overview");
-//                JsonObject priceOverViewObj = priceOverViewE.getAsJsonObject();
-//                JsonElement priceE = priceOverViewObj.get("final");
-//
-//
-//                JsonElement genresE = obj.get("genres"); //extract data according to key
-//                JsonObject genresObj = genresE.getAsJsonObject();
-//                JsonElement genreE = genresObj.get("description");
-//
-//                JsonElement shortDescriptionE = obj.get("short_description");
-//
-//
-//                JsonElement videosE = obj.get("movies"); //extract data according to key
-//                JsonObject videosObj = videosE.getAsJsonObject();
-//                JsonElement trailerE = videosObj.get("");
-//
-//
-//
-//                //JSONArray array = (JSONArray)obj;
-//                //JSONArray politics = ((JSONObject)array.get(0)).get("politics"));
-//
-//                //String name = gameNameE.toString().replace("\"", "").trim();//replace backslash of string, also trim any spaces before and after the string
-//                //String nativeName = nativeNameE.toString().replace("\"", "").trim();//replace backslash of string, also trim any spaces before and after the string
-//                //String flag = flagE.toString().replace("\"", "").trim();//replace backslash of string, also trim any spaces before and after the string
-//
-//                //arrGames.add(new GameData(name,nativeName,flag));
-//                //GameData(String gameName, int rating, int image, int price, String genre, String description, String videoURL)   GameData()
                 double priceDouble = (double) price /100;
                 int metaCriticScoreInt = Integer.parseInt(metaCriticScore);
-                arrGames.add(new GameData(nameE, metaCriticScoreInt, imageUri, priceDouble, genreString, shortDescriptionE, movieUri));
-
-
-
-
-
+                arrGames.add(new GameData(nameE, metaCriticScoreInt, k, priceDouble, genreString, shortDescriptionE, movieUri,idNumbers[k]));
 
 
 

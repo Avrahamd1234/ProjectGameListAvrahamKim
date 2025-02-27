@@ -8,13 +8,23 @@ public class GameData {
 
     private String gameName;
     private int rating;
-    private Uri image;
+    private int image;
     private double price;
     private String genre;
     private String description;
     private Uri videoURI;
 
-    public GameData(String gameName, int rating, Uri image, double price, String genre, String description, Uri videoURI) {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    private int id;
+
+    public GameData(String gameName, int rating, int image, double price, String genre, String description, Uri videoURI, int id) {
         this.gameName = gameName;
         this.rating = rating;
         this.image = image;
@@ -22,15 +32,17 @@ public class GameData {
         this.genre = genre;
         this.description = description;
         this.videoURI = videoURI;
+        this.id = id;
     }
     public GameData() {
         this.gameName = "";
         this.rating = 0;
-        this.image = Uri.parse("");
+        this.image = 0;
         this.price = 0;
         this.genre = "";
         this.description = "";
         this.videoURI = Uri.parse("");
+        this.id = 0;
     }
 
     public String getGameName() {
@@ -72,11 +84,11 @@ public class GameData {
         this.rating = rating;
     }
 
-    public Uri getImage() {
+    public int getImage() {
         return image;
     }
 
-    public void setImage(Uri image) {
+    public void setImage(int image) {
         this.image = image;
     }
 
