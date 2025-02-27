@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.example.myapplicationrv.R;
 import com.example.myapplicationrv.Services.DataService;
@@ -31,7 +33,7 @@ import java.util.List;
 public class GameListFragment extends Fragment {
 
     //private ArrayList<GameData> arr;
-    public ArrayList<GameData> arr2;
+    private ArrayList<GameData> arr2;
     //private ArrayList<GameData> arrSearch;
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
@@ -90,8 +92,6 @@ public class GameListFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        // EditText searchBox = mainActivityGameList.findViewById(R.id.fragmentGameListEditTextSearchBox);
-        // String searchBoxText = searchBox.getText().toString();
 
         DataService dataService = new DataService();
         arr2 = dataService.getAllGames();
@@ -99,7 +99,17 @@ public class GameListFragment extends Fragment {
         //if(searchBoxText.isEmpty()) {
             customeAdapter = new CustomeAdapter(arr2);
             recyclerView.setAdapter(customeAdapter);
+            ImageButton button = view.findViewById(R.id.fragmentGameListSearchButton);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                 filterGamesOnClick(v);
+                }
+            });
+
+
             return view;
+
         //}
 //        else {
 //
@@ -111,13 +121,17 @@ public class GameListFragment extends Fragment {
 
         }
 
-//    private void filterGames(String type,ArrayList<GameData> arr;) {
-//        List<GameData> filteredList = new ArrayList<>();
-//        for(GameData gameData : arr)
-//            if(charityData.getCharity_name().equalsIgnoreCase(type))
-//                filteredList.add(charityData);
-//        // you have the filtered list "filteredList". Use it however you want
-//    }
+    public void filterGamesOnClick(View view) {
+        MainActivityGameList mainActivityGameList = (MainActivityGameList) getActivity();
+        EditText searchBox = mainActivityGameList.findViewById(R.id.fragmentGameListEditTextSearchBox);
+        String searchBoxText = searchBox.getText().toString();
+        ArrayList<GameData> filteredList = new ArrayList<>();
+        for(GameData gameData : arr2)
+            if(gameData.getGameName().toLowerCase().contains(searchBoxText.toLowerCase()))
+            filteredList.add(gameData);
+        customeAdapter = new CustomeAdapter(filteredList);
+        recyclerView.setAdapter(customeAdapter);
+    }
 
 
 }

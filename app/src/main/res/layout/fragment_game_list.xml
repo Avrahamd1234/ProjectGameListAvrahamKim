@@ -26,9 +26,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.1"
-            android:src="@drawable/searchicon"
             android:contentDescription="Click Here to Search"
-            />
+            android:src="@drawable/searchicon" />
 
     </LinearLayout>
 
