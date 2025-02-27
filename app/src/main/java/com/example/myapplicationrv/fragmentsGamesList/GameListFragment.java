@@ -173,13 +173,22 @@ public class GameListFragment extends Fragment {
 
 
         //if(searchBoxText.isEmpty()) {
-            ImageButton button = view.findViewById(R.id.fragmentGameListSearchButton);
-            button.setOnClickListener(new View.OnClickListener() {
+            ImageButton nameButton = view.findViewById(R.id.fragmentGameListSearchButton);
+            nameButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                 filterGamesOnClick(v);
+                 filterGamesOnClick(v, 1);
                 }
             });
+
+            ImageButton favButton = view.findViewById(R.id.fragmentGameListFavSearchButton);
+            favButton.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) { filterGamesOnClick(v, 2);}
+            });
+
+
+
 
             return view;
 
@@ -194,16 +203,40 @@ public class GameListFragment extends Fragment {
 
         }
 
-    public void filterGamesOnClick(View view) {
+    public void filterGamesOnClick(View view,int filterType) {//type 1 = name, type2 = fav, type 3 = genre
         MainActivityGameList mainActivityGameList = (MainActivityGameList) getActivity();
         EditText searchBox = mainActivityGameList.findViewById(R.id.fragmentGameListEditTextSearchBox);
         String searchBoxText = searchBox.getText().toString();
         ArrayList<GameData> filteredList = new ArrayList<>();
-        for(GameData gameData : arr2)
-            if(gameData.getGameName().toLowerCase().contains(searchBoxText.toLowerCase()))
-            filteredList.add(gameData);
-        customeAdapter = new CustomeAdapter(filteredList,userFavorites);
-        recyclerView.setAdapter(customeAdapter);
+        switch(filterType){
+            case 1: {//show game names
+                for (GameData gameData : arr2)
+                    if (gameData.getGameName().toLowerCase().contains(searchBoxText.toLowerCase()))
+                        filteredList.add(gameData);
+                customeAdapter = new CustomeAdapter(filteredList, userFavorites);
+                recyclerView.setAdapter(customeAdapter);
+                break;
+            }
+            case 2: {
+                for (GameData gameData : arr2) {
+                    for (Integer idFav : userFavorites)
+                        if (gameData.getId() == idFav) {
+                            filteredList.add(gameData);
+                        }
+                }
+                customeAdapter = new CustomeAdapter(filteredList, userFavorites);
+                recyclerView.setAdapter(customeAdapter);
+                break;
+            }
+            case 3:
+                for(GameData gameData : arr2){
+                    if (gameData.getGenre().toLowerCase().contains(searchBoxText.toLowerCase()))
+                        filteredList.add(gameData);
+                    customeAdapter = new CustomeAdapter(filteredList, userFavorites);
+                    recyclerView.setAdapter(customeAdapter);
+                    break;
+                }
+        }
     }
 
 

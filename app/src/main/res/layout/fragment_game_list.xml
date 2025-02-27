@@ -24,10 +24,18 @@
         <ImageButton
             android:id="@+id/fragmentGameListSearchButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.1"
             android:contentDescription="Click Here to Search"
             android:src="@drawable/searchicon" />
+
+        <ImageButton
+            android:id="@+id/fragmentGameListFavSearchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:contentDescription="Click here to show favorites"
+            android:src="@drawable/favsearchicon" />
 
     </LinearLayout>
 
