@@ -80,6 +80,13 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0.3"
                         android:text="Genre" />
+
+                    <TextView
+                        android:id="@+id/cardViewTextViewSteamIdStatic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        android:text="Steam ID" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -91,23 +98,28 @@
                     <TextView
                         android:id="@+id/cardViewTextViewGameRating"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.9"
+                        android:layout_height="wrap_content"
                         android:text="Score" />
-
-                    <TextView
-                        android:id="@+id/cardViewTextViewGamePrice"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.9"
-                        android:text="Price" />
 
                     <TextView
                         android:id="@+id/cardViewTextViewGameGenre"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.9"
+                        android:layout_height="wrap_content"
                         android:text="Genre" />
+
+                    <TextView
+                        android:id="@+id/cardViewTextViewGamePrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.9"
+                        android:text="Price" />
+
+                    <TextView
+                        android:id="@+id/cardViewTextViewSteamId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.9"
+                        android:text="Id" />
                 </LinearLayout>
 
             </LinearLayout>

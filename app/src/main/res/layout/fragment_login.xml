@@ -37,7 +37,7 @@
         android:ems="10"
         android:gravity="center"
         android:hint="Password"
-        android:inputType="text" />
+        android:inputType="text|textPassword" />
 
     <Button
         android:id="@+id/loginButtonFragmentLogin"

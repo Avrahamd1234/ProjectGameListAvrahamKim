@@ -63,7 +63,7 @@ public class MainActivityLogin extends AppCompatActivity { //First main activity
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         // register success, update UI with the signed-in user's information
-                        writeData(emailString,phoneString);
+                        writeData(emailString);
                         Toast.makeText(MainActivityLogin.this, "register successful",Toast.LENGTH_LONG).show();
                         Navigation.findNavController(view).navigate(R.id.action_registerFragment2_to_loginFragment);
                     } else {
@@ -101,29 +101,15 @@ public class MainActivityLogin extends AppCompatActivity { //First main activity
 
 
     }
-    public void writeData(String emailString, String phoneString){
+    public void writeData(String emailString){
 // Write a message to the database
         Toast.makeText(MainActivityLogin.this, "inside writeData function",Toast.LENGTH_LONG).show();
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://gameview-10362-default-rtdb.firebaseio.com/");//pipe into database
         FirebaseUser firebaseuser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference myRef = database.getReference("users").child(firebaseuser.getUid().toString());//the "path" for the database
         ArrayList<Integer> favoritesList = new ArrayList<Integer>();
-        favoritesList.add(1);
-        favoritesList.add(1);
-        favoritesList.add(1);
-        favoritesList.add(1);
-        favoritesList.add(1);
-        favoritesList.add(1);
-        favoritesList.add(1);
-        favoritesList.add(1);
-        favoritesList.add(1);
         favoritesList.add(0);
-        favoritesList.add(0);
-        favoritesList.add(0);
-        favoritesList.add(0);
-        favoritesList.add(0);
-        favoritesList.add(0);
-        User user = new User(emailString,phoneString,favoritesList);
+        User user = new User(emailString,favoritesList);
         myRef.setValue(user);//the object we're trying to insert to DB
     }
     public void readData(){

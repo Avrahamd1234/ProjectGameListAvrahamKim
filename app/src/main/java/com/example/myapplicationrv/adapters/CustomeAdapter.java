@@ -26,8 +26,11 @@ import com.example.myapplicationrv.classes.myGameData;
 import com.example.myapplicationrv.models.GameData;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.sql.Array;
 import java.util.ArrayList;
@@ -37,10 +40,13 @@ import java.util.Locale;
 public class CustomeAdapter extends RecyclerView.Adapter<CustomeAdapter.myViewHolder> {
 
     private ArrayList<GameData> arr;
-
-    public CustomeAdapter(ArrayList<GameData> arr) {
+    private ArrayList<Integer> arrFav;
+    private Boolean isFav;
+    public CustomeAdapter(ArrayList<GameData> arr, ArrayList<Integer> arrFav) {
 
         this.arr = arr;
+        this.arrFav = arrFav;
+
     }
 
     public class myViewHolder extends RecyclerView.ViewHolder {
@@ -51,6 +57,7 @@ public class CustomeAdapter extends RecyclerView.Adapter<CustomeAdapter.myViewHo
         TextView price;
         TextView genre;
         TextView description;
+        TextView id;
         Button showMoreOrLessButton;
         VideoView videoView;
 
@@ -62,6 +69,7 @@ public class CustomeAdapter extends RecyclerView.Adapter<CustomeAdapter.myViewHo
             price = itemView.findViewById(R.id.cardViewTextViewGamePrice);
             genre = itemView.findViewById(R.id.cardViewTextViewGameGenre);
             favButton = itemView.findViewById(R.id.cardViewImageButtonFavButton);
+            id = itemView.findViewById((R.id.cardViewTextViewSteamId));
             // Button showMoreOrLessButton = itemView.findViewById(R.id.cardViewButtonShowMoreOrLess);
             //VideoView videoview = itemView.findViewById(R.id.cardViewVideoViewGameTrailer);
             description = itemView.findViewById(R.id.cardViewTextViewGameDescription);
@@ -96,37 +104,128 @@ public class CustomeAdapter extends RecyclerView.Adapter<CustomeAdapter.myViewHo
         holder.price.setText(String.format(Locale.getDefault(), "%f", arr.get(position).getPrice()));
         holder.genre.setText(arr.get(position).getGenre());
         holder.description.setText(arr.get(position).getDescription());
-        int currentId = arr.get(position).getId();
-        if (arr.get(position).getFav()) {
-            holder.favButton.setImageResource(R.drawable.favfull);
-        }
-        else
-        {
-            holder.favButton.setImageResource(R.drawable.favempty);
-        }
-        holder.favButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
+        holder.id.setText(arr.get(position).getId()+"");
+//        int currentId = arr.get(position).getId();
+        holder.favButton.setImageResource(R.drawable.favempty);
+        for (Integer favTest : arrFav) {
+            if (arr.get(position).getId() == favTest) {
+                holder.favButton.setImageResource(R.drawable.favfull);
             }
-        });
+            holder.favButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    isFav = false;
+                    for (Integer favTestInButton : arrFav) {
+                        if (Integer.parseInt((String) holder.id.getText()) == favTestInButton) {
+                            isFav = true;
+                            //remove the id from firebase
+                            FirebaseDatabase database = FirebaseDatabase.getInstance("https://gameview-10362-default-rtdb.firebaseio.com/");//pipe into database
+                            FirebaseUser firebaseuser = FirebaseAuth.getInstance().getCurrentUser();
+                            DatabaseReference myRef = database.getReference("users").child(firebaseuser.getUid().toString());//the "path" for the database
+                            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    User tempUser = snapshot.getValue(User.class);
+                                    arrFav.remove(favTestInButton);
+                                    tempUser.setFavorites(arrFav);
+                                    String tempEmail = tempUser.getEmail();
+                                    myRef.setValue(tempUser);
+                                }
 
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+                        }
+
+//                        User user = new User(emailString,phoneString,favoritesList);
+//                        myRef.setValue(user);//the object we're trying to insert to DB
+
+//FirebaseUser firebaseuser = FirebaseAuth.getInstance().getCurrentUser();
+//        //see if we need to check if a user is logged in
+//        FirebaseDatabase database = FirebaseDatabase.getInstance("https://gameview-10362-default-rtdb.firebaseio.com/");
+//        DatabaseReference myRef = database.getReference("users").child(firebaseuser.getUid().toString());
+//        myRef.addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(DataSnapshot dataSnapshot) {
+//                    if (dataSnapshot.exists()) {
+//                        User value = dataSnapshot.getValue(User.class);
+//                        TextView readDataText = view.findViewById(R.id.gameListFragmentUserTextView);
+//                        readDataText.setText("Hello," + value.getEmail());
+//                        userFavorites = value.getFavorites();
+//                        customeAdapter = new CustomeAdapter(arr2,userFavorites);
+//                        recyclerView.setAdapter(customeAdapter);
+////                      userFavorites = dataSnapshot.getValue(String.class);
+////                      for(DataSnapshot ds : dataSnapshot.getChildren()) {
+////                      Integer intSnap = ds.getValue(Integer.class);
+////                      userFavorites.add(intSnap);
+////                    }
+//                    }
+//                }
+//                @Override
+//                public void onCancelled(DatabaseError error) {
+//                    // Failed to read value
+//                    Log.w(TAG, "Failed to read value.", error.toException());
+//                }
+//        });
+                            //        favoritesList.add(291690);
+                            //        favoritesList.add(1);
+                            //        favoritesList.add(1);
+                            //        favoritesList.add(1);
+                            //        favoritesList.add(1);
+                            //        favoritesList.add(1);
+                            //        favoritesList.add(1);
+                            //        favoritesList.add(1);
+                            //        favoritesList.add(1);
+                            //        favoritesList.add(0);
+                            //        favoritesList.add(0);
+                            //        favoritesList.add(0);
+                            //        favoritesList.add(0);
+                            //        favoritesList.add(0);
+                            //        favoritesList.add(0);
+                            //        User user = new User(emailString,phoneString,favoritesList);
+                            //        myRef.setValue(user);//the object we're trying to insert to DB
+                            //    }
+
+                    }
+                    if(isFav != true) {//we know that we can write !isFav but this is more readable.
+                        FirebaseDatabase database = FirebaseDatabase.getInstance("https://gameview-10362-default-rtdb.firebaseio.com/");//pipe into database
+                        FirebaseUser firebaseuser = FirebaseAuth.getInstance().getCurrentUser();
+                        DatabaseReference myRef = database.getReference("users").child(firebaseuser.getUid().toString());//the "path" for the database
+                        myRef.addListenerForSingleValueEvent(new ValueEventListener(){
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                Toast.makeText(v.getContext(), "inside false fav",Toast.LENGTH_LONG).show();
+                                User tempUser = snapshot.getValue(User.class);
+                                arrFav.add(arr.get(position).getId());
+                                tempUser.setFavorites(arrFav);
+                                myRef.setValue(tempUser);
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                    }
+                }});
+        }
 
 //            if(gameData.getGameName().toLowerCase().contains(searchBoxText.toLowerCase()))
 //                filteredList.add(gameData);
 //
 //        if(arr.get(position).getId())
 //        holder.favButton.setImageResource();
-        //holder.videoView.setVideoURI(arr.get(position).getVideoURL());
+            //holder.videoView.setVideoURI(arr.get(position).getVideoURL());
+        }
+
+        @Override
+        public int getItemCount () {
+            return arr.size();
+        }
+
     }
-
-    @Override
-    public int getItemCount() {
-        return arr.size();
-    }
-}
-
-
 ////public void writeFavoriteData(Integer id){
 ////// Write a message to the database
 ////    //Toast.makeText(MainActivityLogin.this, "inside writeData function",Toast.LENGTH_LONG).show();

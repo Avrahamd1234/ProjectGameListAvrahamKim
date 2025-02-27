@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -27,7 +28,7 @@ import java.util.ArrayList;
 public class MainActivityGameList extends AppCompatActivity {
 //This is the prepared recycle view main code, we transferred it to a fragment
 
-//     private ArrayList<Data> arr;
+//    private ArrayList<Data> arr;
 //    private RecyclerView recyclerView;
 //    private LinearLayoutManager layoutManager;
 //    private CustomeAdapter customeAdapter;
@@ -43,7 +44,7 @@ public class MainActivityGameList extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+//old recycleView Code
 //        recyclerView = findViewById(R.id.gameListFragmentRvcon);
 //        layoutManager = new LinearLayoutManager(this);
 //        recyclerView.setLayoutManager(layoutManager);
@@ -59,40 +60,64 @@ public class MainActivityGameList extends AppCompatActivity {
 //                        myData.id_[i]
 //                ) );
         }
+//    public ArrayList<Integer> readData(ArrayList<Integer> favorites){
+//// Read from the database
+//        FirebaseUser firebaseuser = FirebaseAuth.getInstance().getCurrentUser();
+////    see if we need to check if a user is logged in
+//        FirebaseDatabase database = FirebaseDatabase.getInstance("https://gameview-10362-default-rtdb.firebaseio.com/");
+//        DatabaseReference myRef = database.getReference("users").child(firebaseuser.getUid().toString());
+////    myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+////        @Override
+////        public void onDataChange(DataSnapshot dataSnapshot) {
+//////            userFavorites = dataSnapshot.getValue(String.class);
+////            for(DataSnapshot ds : dataSnapshot.getChildren()) {
+////                Integer intSnap = ds.getValue(Integer.class);
+////                userFavorites.add(intSnap);
+////            }
+////            //do what you want with the email
+////
+////        }
+////
+////        @Override
+////        public void onCancelled(@NonNull DatabaseError error) {
+////
+////        }
+////    });
+//        myRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                // This method is called once with the initial value and again
+//                // whenever data at this location is updated.
+//                if (dataSnapshot.exists()) {
+//                    // Data exists, process it
+//                    User value = dataSnapshot.getValue(User.class);
+////              Toast.makeText(MainActivity.this, value.getEmail(), Toast.LENGTH_LONG).show();
+//                    TextView readDataText = findViewById(R.id.gameListFragmentUserTextView);
+//                    readDataText.setText("Hello," + value.getEmail());
+//                    //DatabaseReference myRef = database.getReference("users").child(firebaseuser.getUid().toString());//the "path" for the database
+//                    userFavorites = value.getFavorites();
+//                } else {
+//                    // Data does not exist at this location
+//                    Log.d("Firebase", "No data found at this location.");
+//
+//                }
+//            }
+//            @Override
+//            public void onCancelled(DatabaseError error) {
+//                // Failed to read value
+//                Log.w(TAG, "Failed to read value.", error.toException());
+//            }
+//        });
+//
+////    }
+////    else{
+////        Toast.makeText(this, "empty user",Toast.LENGTH_LONG).show();
+////    }
+//        return userFavorites;
+//    }
+
+}
 
 //        customeAdapter = new CustomeAdapter(arr);
 //        recyclerView.setAdapter(customeAdapter);
 //    }
-public ArrayList<Integer> readData(ArrayList<Integer> favorites){
-// Read from the database
-    FirebaseUser firebaseuser = FirebaseAuth.getInstance().getCurrentUser();
-//    see if we need to check if a user is logged in
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://gameview-10362-default-rtdb.firebaseio.com/");
-        DatabaseReference myRef = database.getReference("users").child(firebaseuser.getUid().toString());
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                User value = dataSnapshot.getValue(User.class);
-//              Toast.makeText(MainActivity.this, value.getEmail(), Toast.LENGTH_LONG).show();
-                TextView readDataText = findViewById(R.id.gameListFragmentUserTextView);
-                readDataText.setText("Hello," + value.getEmail());
-                userFavorites = value.getFavorites();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-    });
-
-//    }
-//    else{
-//        Toast.makeText(this, "empty user",Toast.LENGTH_LONG).show();
-//    }
-    return userFavorites;
-
-}
-}

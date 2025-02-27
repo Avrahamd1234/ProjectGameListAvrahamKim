@@ -14,6 +14,7 @@ public class GameData {
     private String description;
     private Uri videoURI;
     private Boolean isFav;
+    private int id;
 
     public int getId() {
         return id;
@@ -23,7 +24,7 @@ public class GameData {
         this.id = id;
     }
 
-    private int id;
+
 
     public GameData(String gameName, int rating, int image, double price, String genre, String description, Uri videoURI, int id, Boolean isFav) {
         this.gameName = gameName;

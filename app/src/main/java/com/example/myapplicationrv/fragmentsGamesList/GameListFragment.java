@@ -1,11 +1,14 @@
 package com.example.myapplicationrv.fragmentsGamesList;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +16,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.myapplicationrv.R;
 import com.example.myapplicationrv.Services.DataService;
 import com.example.myapplicationrv.activities.MainActivityGameList;
 import com.example.myapplicationrv.adapters.CustomeAdapter;
 //import com.example.myapplicationrv.classes.myGameData;
+import com.example.myapplicationrv.classes.User;
 import com.example.myapplicationrv.models.GameData;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +45,7 @@ import java.util.List;
 public class GameListFragment extends Fragment {
 
     //private ArrayList<GameData> arr;
+    private ArrayList<Integer> userFavorites;
     private ArrayList<GameData> arr2;
     //private ArrayList<GameData> arrSearch;
     private RecyclerView recyclerView;
@@ -85,19 +98,81 @@ public class GameListFragment extends Fragment {
         // Inflate the layout for this fragment
         MainActivityGameList mainActivityGameList = (MainActivityGameList) getActivity();
         View view =  inflater.inflate(R.layout.fragment_game_list, container, false);
-        ArrayList<Integer> userFavorites = new ArrayList<>();
-        mainActivityGameList.readData(userFavorites);
+        userFavorites = new ArrayList<>();
+//        mainActivityGameList.readData(userFavorites);
         recyclerView = view.findViewById(R.id.fragmentGameListRecycleView);
         layoutManager = new LinearLayoutManager(getActivity()); //if problems arise - look into "onAttach (Context context)"
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         DataService dataService = new DataService();
-        arr2 = dataService.getAllGames(userFavorites);
+        arr2 = dataService.getAllGames(userFavorites); //add more threads to the function
+//        customeAdapter = new CustomeAdapter(arr2,userFavorites);
+//        recyclerView.setAdapter(customeAdapter);
+
+        FirebaseUser firebaseuser = FirebaseAuth.getInstance().getCurrentUser();
+        //see if we need to check if a user is logged in
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://gameview-10362-default-rtdb.firebaseio.com/");
+        DatabaseReference myRef = database.getReference("users").child(firebaseuser.getUid().toString());
+        myRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        User value = dataSnapshot.getValue(User.class);
+                        TextView readDataText = view.findViewById(R.id.gameListFragmentUserTextView);
+                        readDataText.setText("Hello," + value.getEmail());
+                        userFavorites = value.getFavorites();
+                        customeAdapter = new CustomeAdapter(arr2,userFavorites);
+                        recyclerView.setAdapter(customeAdapter);
+//                      userFavorites = dataSnapshot.getValue(String.class);
+//                      for(DataSnapshot ds : dataSnapshot.getChildren()) {
+//                      Integer intSnap = ds.getValue(Integer.class);
+//                      userFavorites.add(intSnap);
+//                    }
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    // Failed to read value
+                    Log.w(TAG, "Failed to read value.", error.toException());
+                }
+        });
+
+//        ////    });
+//                myRef.addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(DataSnapshot dataSnapshot) {
+//                        // This method is called once with the initial value and again
+//                        // whenever data at this location is updated.
+//                        if (dataSnapshot.exists()) {
+//                            // Data exists, process it
+//        //              Toast.makeText(MainActivity.this, value.getEmail(), Toast.LENGTH_LONG).show();
+//
+//                            //DatabaseReference myRef = database.getReference("users").child(firebaseuser.getUid().toString());//the "path" for the database
+//                        } else {
+//                            // Data does not exist at this location
+//                            Log.d("Firebase", "No data found at this location.");
+//
+//                        }
+//                    }
+//                    @Override
+//                    public void onCancelled(DatabaseError error) {
+//                        // Failed to read value
+//                        Log.w(TAG, "Failed to read value.", error.toException());
+//                    }
+//                });
+//        //
+//        ////    }
+//        ////    else{
+//        ////        Toast.makeText(this, "empty user",Toast.LENGTH_LONG).show();
+//        ////    }
+//        //        return userFavorites;
+//        //
+//        //    }
+
 
         //if(searchBoxText.isEmpty()) {
-            customeAdapter = new CustomeAdapter(arr2);
-            recyclerView.setAdapter(customeAdapter);
             ImageButton button = view.findViewById(R.id.fragmentGameListSearchButton);
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -105,7 +180,6 @@ public class GameListFragment extends Fragment {
                  filterGamesOnClick(v);
                 }
             });
-
 
             return view;
 
@@ -128,7 +202,7 @@ public class GameListFragment extends Fragment {
         for(GameData gameData : arr2)
             if(gameData.getGameName().toLowerCase().contains(searchBoxText.toLowerCase()))
             filteredList.add(gameData);
-        customeAdapter = new CustomeAdapter(filteredList);
+        customeAdapter = new CustomeAdapter(filteredList,userFavorites);
         recyclerView.setAdapter(customeAdapter);
     }
 
