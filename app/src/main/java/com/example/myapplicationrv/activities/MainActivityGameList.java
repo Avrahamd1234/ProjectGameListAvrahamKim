@@ -22,14 +22,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class MainActivityGameList extends AppCompatActivity {
 //This is the prepared recycle view main code, we transferred it to a fragment
 
-// private ArrayList<Data> arr;
+//     private ArrayList<Data> arr;
 //    private RecyclerView recyclerView;
 //    private LinearLayoutManager layoutManager;
 //    private CustomeAdapter customeAdapter;
-
+    public ArrayList<Integer> userFavorites;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -61,7 +63,7 @@ public class MainActivityGameList extends AppCompatActivity {
 //        customeAdapter = new CustomeAdapter(arr);
 //        recyclerView.setAdapter(customeAdapter);
 //    }
-public void readData(){
+public ArrayList<Integer> readData(ArrayList<Integer> favorites){
 // Read from the database
     FirebaseUser firebaseuser = FirebaseAuth.getInstance().getCurrentUser();
 //    see if we need to check if a user is logged in
@@ -76,6 +78,7 @@ public void readData(){
 //              Toast.makeText(MainActivity.this, value.getEmail(), Toast.LENGTH_LONG).show();
                 TextView readDataText = findViewById(R.id.gameListFragmentUserTextView);
                 readDataText.setText("Hello," + value.getEmail());
+                userFavorites = value.getFavorites();
             }
 
             @Override
@@ -89,5 +92,7 @@ public void readData(){
 //    else{
 //        Toast.makeText(this, "empty user",Toast.LENGTH_LONG).show();
 //    }
-    }
+    return userFavorites;
+
+}
 }

@@ -83,18 +83,17 @@ public class GameListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        //fix copying MainActivity to this Fragment
         MainActivityGameList mainActivityGameList = (MainActivityGameList) getActivity();
         View view =  inflater.inflate(R.layout.fragment_game_list, container, false);
-        mainActivityGameList.readData();
+        ArrayList<Integer> userFavorites = new ArrayList<>();
+        mainActivityGameList.readData(userFavorites);
         recyclerView = view.findViewById(R.id.fragmentGameListRecycleView);
         layoutManager = new LinearLayoutManager(getActivity()); //if problems arise - look into "onAttach (Context context)"
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-
         DataService dataService = new DataService();
-        arr2 = dataService.getAllGames();
+        arr2 = dataService.getAllGames(userFavorites);
 
         //if(searchBoxText.isEmpty()) {
             customeAdapter = new CustomeAdapter(arr2);

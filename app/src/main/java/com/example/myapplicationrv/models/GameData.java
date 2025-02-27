@@ -13,6 +13,7 @@ public class GameData {
     private String genre;
     private String description;
     private Uri videoURI;
+    private Boolean isFav;
 
     public int getId() {
         return id;
@@ -24,7 +25,7 @@ public class GameData {
 
     private int id;
 
-    public GameData(String gameName, int rating, int image, double price, String genre, String description, Uri videoURI, int id) {
+    public GameData(String gameName, int rating, int image, double price, String genre, String description, Uri videoURI, int id, Boolean isFav) {
         this.gameName = gameName;
         this.rating = rating;
         this.image = image;
@@ -33,6 +34,7 @@ public class GameData {
         this.description = description;
         this.videoURI = videoURI;
         this.id = id;
+        this.isFav = isFav;
     }
     public GameData() {
         this.gameName = "";
@@ -43,6 +45,15 @@ public class GameData {
         this.description = "";
         this.videoURI = Uri.parse("");
         this.id = 0;
+        this.isFav = false;
+    }
+
+    public Boolean getFav() {
+        return isFav;
+    }
+
+    public void setFav(Boolean fav) {
+        isFav = fav;
     }
 
     public String getGameName() {

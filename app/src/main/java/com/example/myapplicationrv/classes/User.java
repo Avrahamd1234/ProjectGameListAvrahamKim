@@ -5,9 +5,9 @@ import java.util.ArrayList;
 public class User {
     private String email;
     private String phoneNumber;
-    private ArrayList<String> favorites = new ArrayList<String>(); // Create an ArrayList object
+    private ArrayList<Integer> favorites; //= new ArrayList<Integer>(); // Create an ArrayList object
 
-    public User(String email, String phoneNumber, ArrayList<String> favorites) {
+    public User(String email, String phoneNumber, ArrayList<Integer> favorites) {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.favorites = favorites;
@@ -15,7 +15,7 @@ public class User {
     public User(){ //empty constructor
         this.email = "";
         this.phoneNumber = "";
-        this.favorites = new ArrayList<String>();
+        this.favorites = new ArrayList<Integer>();
     }
 
     public String getEmail() {
@@ -34,11 +34,11 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public ArrayList<String> getFavorites() {
+    public ArrayList<Integer> getFavorites() {
         return favorites;
     }
 
-    public void setFavorites(ArrayList<String> favorites) {
+    public void setFavorites(ArrayList<Integer> favorites) {
         this.favorites = favorites;
     }
 }

@@ -107,7 +107,22 @@ public class MainActivityLogin extends AppCompatActivity { //First main activity
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://gameview-10362-default-rtdb.firebaseio.com/");//pipe into database
         FirebaseUser firebaseuser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference myRef = database.getReference("users").child(firebaseuser.getUid().toString());//the "path" for the database
-        ArrayList<String> favoritesList= new ArrayList<String>();
+        ArrayList<Integer> favoritesList = new ArrayList<Integer>();
+        favoritesList.add(1);
+        favoritesList.add(1);
+        favoritesList.add(1);
+        favoritesList.add(1);
+        favoritesList.add(1);
+        favoritesList.add(1);
+        favoritesList.add(1);
+        favoritesList.add(1);
+        favoritesList.add(1);
+        favoritesList.add(0);
+        favoritesList.add(0);
+        favoritesList.add(0);
+        favoritesList.add(0);
+        favoritesList.add(0);
+        favoritesList.add(0);
         User user = new User(emailString,phoneString,favoritesList);
         myRef.setValue(user);//the object we're trying to insert to DB
     }
