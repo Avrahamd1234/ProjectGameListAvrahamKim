@@ -213,7 +213,7 @@ public class CustomeAdapter extends RecyclerView.Adapter<CustomeAdapter.myViewHo
                         myRef.addListenerForSingleValueEvent(new ValueEventListener(){
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                                Toast.makeText(v.getContext(), "inside false fav",Toast.LENGTH_LONG).show();
+//                              Toast.makeText(v.getContext(), "inside false fav",Toast.LENGTH_LONG).show();
                                 User tempUser = snapshot.getValue(User.class);
                                 arrFav.add(arr.get(position).getId());
                                 tempUser.setFavorites(arrFav);
